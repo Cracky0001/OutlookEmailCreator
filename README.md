@@ -23,4 +23,4 @@ Please note that creating accounts through third party software is against the [
 - [Selenium.WebDriver](https://www.nuget.org/packages/Selenium.WebDriver/)
 - [Selenium.WebDriver.ChromeDriver](https://www.nuget.org/packages/Selenium.WebDriver.ChromeDriver/)
 
-I hope this helps you understand your code and use the program!
+I hope this helps!
