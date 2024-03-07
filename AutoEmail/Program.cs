@@ -2,6 +2,9 @@
 using OpenQA.Selenium.Chrome;
 using System;
 using System.Linq;
+using WebDriverManager;
+using WebDriverManager.DriverConfigs.Impl;
+using WebDriverManager.Helpers;
 
 namespace ConsoleApp
 {
@@ -9,9 +12,12 @@ namespace ConsoleApp
     {
         static void Main(string[] args)
         {
-            // Initialize Chromedriver
+            new DriverManager().SetUpDriver(new ChromeConfig(), VersionResolveStrategy.MatchingBrowser);
+
             var options = new ChromeOptions();
-            options.AddArgument("--no-sandbox --disable-infobars --incognito");
+            options.AddArgument("--no-sandbox");
+            options.AddArgument("--disable-infobars");
+            options.AddArgument("--incognito");
             ChromeDriver driver = new ChromeDriver(options);
 
             // Benutzerdaten generieren
@@ -21,6 +27,9 @@ namespace ConsoleApp
             var lastname = userData.Item1;
             var password = userData.Item2;
             var email = $"C{username}";
+            // Benutzerdaten in einer ordnerstruktur, die sich im selben Verzeichnis wie das Programm befindet, speichern Account/Outlook/username.txt
+            System.IO.Directory.CreateDirectory("Accounts/Outlook");
+            System.IO.File.WriteAllText($"Accounts/Outlook/C{username}@outlook.de.txt", $"Email: C{username}@outlook.de.txt\nPassword: {password}\n Firstname: {firstname}\n Lastname: {lastname}");
 
             // Website für das Erstellen eines E-Mail-Accounts bei Outlook aufrufen
             driver.Navigate().GoToUrl("https://signup.live.com/signup?lcid=1033&wa=wsignin1.0&rpsnv=13&ct=1672112140&rver=7.0.6737.0&wp=MBI_SSL&wreply=https%3a%2f%2foutlook.live.com%2fowa%2f%3fnlp%3d1%26signup%3d1%26RpsCsrfState%3dec907f44-5c7c-95bc-fb36-fbb9207b2321&id=292841&CBCXT=out&lw=1&fl=dob%2cflname%2cwld&cobrandid=90015&lic=1&uaid=13dee67bbb024f75b33a579b5e53cfb5");
@@ -41,7 +50,7 @@ namespace ConsoleApp
             firstNameField.SendKeys($"{firstname}");
             var lastNameField = driver.FindElement(By.Id("LastName"));
             lastNameField.SendKeys($"{lastname}");
-            
+
 
 
             // Formular absenden
@@ -52,7 +61,7 @@ namespace ConsoleApp
             birthdayDay.SendKeys(Keys.Enter);
             birthdayDay.SendKeys(Keys.ArrowDown);
             birthdayDay.SendKeys(Keys.Enter);
-           // System.Threading.Thread.Sleep(2000);
+            // System.Threading.Thread.Sleep(2000);
             var birthdayMonth = driver.FindElement(By.Id("BirthMonth"));
             birthdayMonth.SendKeys(Keys.Enter);
             birthdayMonth.SendKeys(Keys.ArrowDown);
@@ -63,27 +72,33 @@ namespace ConsoleApp
             var submitButton2 = driver.FindElement(By.Id("iSignupAction"));
             submitButton2.Click();
             System.Threading.Thread.Sleep(-1);
-        }
 
-        static Tuple<string, string> GenerateRandomUserData()
-        {
-            // Zufälligen Benutzernamen erstellen
-            var chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-            var random = new Random();
-            var username = new string(
-                Enumerable.Repeat(chars, 8)
-                .Select(s => s[random.Next(s.Length)])
-                    .ToArray());
-            // Zufälliges Passwort erstellen
-            var password = new string(
-                Enumerable.Repeat(chars, 12)
-                          .Select(s => s[random.Next(s.Length)])
-                          .ToArray());
+            // Benutzerdaten in einer ordnerstruktur, die sich im selben Verzeichnis wie das Programm befindet, speichern Account/Outlook/username.txt
+            System.IO.Directory.CreateDirectory("Account/Outlook");
+            System.IO.File.WriteAllText($"Account/Outlook/{username}.txt", $"Username: {username}\nPassword: {password}");
 
-            // Benutzerdaten als Tuple zurückgeben
-            return Tuple.Create(username, password);
+            static Tuple<string, string> GenerateRandomUserData()
+            {
+                // Zufälligen Benutzernamen erstellen
+                var chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+                var random = new Random();
+                var username = new string(
+                    Enumerable.Repeat(chars, 8)
+                    .Select(s => s[random.Next(s.Length)])
+                        .ToArray());
+                // Zufälliges Passwort erstellen
+                var password = new string(
+                    Enumerable.Repeat(chars, 12)
+                              .Select(s => s[random.Next(s.Length)])
+                              .ToArray());
 
-            
+                // Benutzerdaten als Tuple zurückgeben
+                return Tuple.Create(username, password);
+
+
+
+
+            }
         }
     }
 }

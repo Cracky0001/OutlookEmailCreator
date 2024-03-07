@@ -14,6 +14,7 @@
 
   <ItemGroup>
     <PackageReference Include="OpenQA.Selenium.Winium" Version="1.0.0.4" />
+    <PackageReference Include="WebDriverManager" Version="2.17.2" />
   </ItemGroup>
 
 </Project>
