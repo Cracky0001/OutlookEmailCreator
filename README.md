@@ -15,7 +15,7 @@ Please note that creating accounts through third party software is against the [
 ## Requirements
 - [Chrome](https://www.google.com/chrome/) or [Chromium](https://www.chromium.org/getting-involved/download-chromium/)
 - [.NET Core](https://dotnet.microsoft.com/download) must be installed.
-- [ChromeDriver](https://chromedriver.chromium.org/) must be available on the system and the path to ChromeDriver must be added to the `PATH` environment variable.
+- [ChromeDriver](https://chromedriver.chromium.org/) (in version 1.1.0+ included) 
 
 
 ## Dependencies
