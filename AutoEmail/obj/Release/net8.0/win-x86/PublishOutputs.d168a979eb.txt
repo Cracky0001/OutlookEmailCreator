@@ -1,0 +1,2 @@
+C:\Users\Cracky\source\repos\OutlookEmailCreator\AutoEmail\bin\Release\net6.0\publish\win-x86\OutlookCreator.pdb
+C:\Users\Cracky\source\repos\OutlookEmailCreator\AutoEmail\bin\Release\net6.0\publish\win-x86\OutlookCreator.exe

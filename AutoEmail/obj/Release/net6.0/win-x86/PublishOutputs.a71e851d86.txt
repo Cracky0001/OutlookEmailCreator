@@ -1,0 +1,2 @@
+C:\Users\mirco\Source\Repos\OutlookEmailCreator\AutoEmail\bin\Release\net6.0\publish\win-x86\OutlookCreator.pdb
+C:\Users\mirco\Source\Repos\OutlookEmailCreator\AutoEmail\bin\Release\net6.0\publish\win-x86\OutlookCreator.exe
